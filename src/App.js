@@ -5,15 +5,26 @@ import './style.css';
 export default function App() {
   const [users, setUser] = useState([]);
   const getUser = async () => {
-    const data = await fetch('https://jsonplaceholder.typicode.com/users');
-    const users = await data.json();
-    const finalData = users.map((user) => {
-      return {
-        name: user.name,
-        username: user.username,
-      };
-    });
-    setUser(finalData);
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then((v) => v.json())
+      .then((users) => {
+        return users.map((user) => {
+          return {
+            name: user.name,
+            username: user.username,
+          };
+        });
+      })
+      .then((finalUsers) => setUser(finalUsers));
+    // const data = await fetch('https://jsonplaceholder.typicode.com/users');
+    // const users = await data.json();
+    // const finalData = users.map((user) => {
+    //   return {
+    //     name: user.name,
+    //     username: user.username,
+    //   };
+    // });
+    // setUser(finalData);
   };
   return (
     <div>
